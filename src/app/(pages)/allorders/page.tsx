@@ -35,6 +35,7 @@ export default function AllOrders() {
     if (!cartOwner || cartOwner === "undefined") return;
 
     getAllOrders(cartOwner);
+    
   }, []);
 
   if (loading)

@@ -4,3 +4,11 @@ export interface UserI {
   email: string;
   phone: string;
 }
+/* 
+
+git add .
+git commit -m "update something"
+git push
+
+
+*/

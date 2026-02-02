@@ -42,7 +42,9 @@ export default function CartContextProvider({
     console.log(data);
     setCartData(data);
     setIsLoading(false);
-    localStorage.setItem("cartOwner", data.data.cartOwner);
+
+
+    localStorage.setItem("cartOwner", data.data?.cartOwner);
     console.log("saved cartOwner:", data.data.cartOwner);
   }
   useEffect(() => {

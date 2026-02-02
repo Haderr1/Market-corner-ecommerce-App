@@ -22,7 +22,7 @@ export default function Cart() {
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [isClearing, setIsClearing] = useState<boolean>(false);
 
-  if (typeof cartData?.data.products[0]?.product == "string") {
+  if (typeof cartData?.data?.products[0]?.product == "string") {
     getCartData();
   }
   /*   typeof cartData?.data.products[0].product == "string" && getCartData();
