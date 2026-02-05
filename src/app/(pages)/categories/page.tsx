@@ -1,7 +1,13 @@
 import { CategoryI } from "@/interfaces";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 export default async function Categories() {
@@ -11,7 +17,7 @@ export default async function Categories() {
   const { data: categories }: { data: CategoryI[] } = await response.json();
 
   return (
-    <div className="px-4 py-8 md:py-12">
+    <section className="px-4 py-8 md:py-12">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
@@ -29,30 +35,30 @@ export default async function Categories() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {categories.map((cat) => (
-          <Link href={"/categories/" + cat._id} key={cat._id}>
-            <Card className="group relative overflow-hidden border-muted/60 bg-background/60 transition hover:-translate-y-1 hover:shadow-lg">
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-primary/40 opacity-70 transition group-hover:opacity-90" />
-              <Image
-                src={cat.image}
-                width={600}
-                height={600}
-                alt={`${cat.name} cover`}
-                className="h-48 w-full object-cover transition duration-300 group-hover:scale-105"
-              />
+            <Link href={"/categories/" + cat._id} key={cat._id}>
+              <Card className="group relative overflow-hidden h-full border-muted/60 bg-background/60 transition hover:-translate-y-1 hover:shadow-lg hover:scale-105">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-primary/40 opacity-70 transition group-hover:opacity-90 " />
+                <Image
+                  src={cat.image}
+                  width={600}
+                  height={600}
+                  alt={`${cat.name} cover`}
+                  className="h-48 w-full object-cover transition duration-300 "
+                />
 
-              <CardHeader>
-                <CardAction>
-                  <Badge variant="secondary" className="text-black">
-                    {cat.slug}
-                  </Badge>
-                </CardAction>
-                <CardTitle>{cat.name}</CardTitle>
-              </CardHeader>
-            </Card>
-          </Link>
+                <CardHeader>
+                  <CardAction>
+                    <Badge variant="secondary" className="text-black mt-auto">
+                      {cat.slug}
+                    </Badge>
+                  </CardAction>
+                  <CardTitle>{cat.name}</CardTitle>
+                </CardHeader>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

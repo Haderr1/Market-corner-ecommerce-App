@@ -66,6 +66,14 @@ export default function Navbar() {
                     <Link href="/brands">Brands</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    asChild
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    <Link href="/subcategories">SubCategories</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
             <div className="flex justify-between items-center gap-6">
@@ -90,8 +98,8 @@ export default function Navbar() {
                 <DropdownMenuContent>
                   <DropdownMenuGroup>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <Link href="/profile">
-                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                    <Link href="/Address">
+                      <DropdownMenuItem>Address</DropdownMenuItem>
                     </Link>
                     <Link href="/login">
                       <DropdownMenuItem>Login</DropdownMenuItem>
