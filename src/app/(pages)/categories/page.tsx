@@ -11,7 +11,7 @@ export default async function Categories() {
   const { data: categories }: { data: CategoryI[] } = await response.json();
 
   return (
-    <section className="px-4 py-8 md:py-12">
+    <div className="px-4 py-8 md:py-12">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
@@ -53,6 +53,6 @@ export default async function Categories() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
