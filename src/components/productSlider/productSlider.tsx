@@ -8,6 +8,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { ProductI } from "@/interfaces";
 import Image from "next/image";
+import AddToWishlist from "../AddToWishlist/AddToWishlist";
 
 export default function ProductSlider({ products }: { products: ProductI }) {
   return (
@@ -59,6 +60,7 @@ export default function ProductSlider({ products }: { products: ProductI }) {
               </CarouselItem>
             ))}
           </CarouselContent>
+            <AddToWishlist productId={products._id} />
         </Carousel>
       </div>
     </>

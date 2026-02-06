@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { FetchAllOrdersAction } from "./_action/FetshAllOrders_action";
 
 export default function AllOrders() {
   const [orders, setOrders] = useState<ordersI[]>([]);
@@ -20,11 +21,7 @@ export default function AllOrders() {
   async function getAllOrders(cartOwner: string) {
     setLoading(true);
 
-    const response = await fetch(
-      "https://ecommerce.routemisr.com/api/v1/orders/user/" + cartOwner,
-    );
-
-    const data: ordersI[] = await response.json();
+  const data = await FetchAllOrdersAction(cartOwner);
     setOrders(data);
 
     setLoading(false);

@@ -1,0 +1,19 @@
+'use server';
+export async function handleRemoveFromWishlistAction(productId: string) {
+  // بعد ما تحذفيه، اعملي تحديث للبيانات عن طريق getWishlistData()
+  const response = await fetch(
+    `https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`,
+    {
+      method: "DELETE",
+      headers: {
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
+        "content-type": "application/json",
+      },
+    },
+  );        
+
+  const data = await response.json();
+  console.log(data);
+  return data;
+}

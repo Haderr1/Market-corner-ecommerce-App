@@ -7,13 +7,10 @@ export default async function Products() {
     "https://ecommerce.routemisr.com/api/v1/products",
   );
   const { data: products }: { data: ProductI[] } = await response.json();
-
-  console.log(products[0]);
-
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
+        {products?.map((product) => (
           <ProductCard key={product._id} products={product} />
         ))}
       </div>

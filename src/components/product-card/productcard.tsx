@@ -1,6 +1,6 @@
+'use client';
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -11,9 +11,10 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { ProductI } from "@/interfaces";
-import { Heart, StarHalf, StarIcon } from "lucide-react";
+import { StarHalf, StarIcon } from "lucide-react";
 import Link from "next/link";
 import AddToCart from "../AddToCart/AddToCart";
+import AddToWishlist from "../AddToWishlist/AddToWishlist";
 
 export default function ProductCard({ products }: { products: ProductI }) {
   return (
@@ -38,9 +39,7 @@ export default function ProductCard({ products }: { products: ProductI }) {
             </CardDescription>
           </CardHeader>
         </Link>
-        <div className="absolute top-4 end-4 bg-primary p-2 rounded-full">
-          <Heart className="text-white" />
-        </div>
+       <AddToWishlist productId={products._id} />
         <CardFooter className="flex flex-col mt-auto">
           <div className="flex gap-2 justify-between items-center w-full pb-4 ">
             <div className="flex gap-2">

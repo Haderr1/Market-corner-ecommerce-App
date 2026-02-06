@@ -9,6 +9,7 @@ import React from "react";
 import { Star } from "lucide-react";
 import ProductSlider from "@/components/productSlider/productSlider";
 import AddToCart from "@/components/AddToCart/AddToCart";
+import AddToWishlist from "@/components/AddToWishlist/AddToWishlist";
 
 export default async function ProductDetails({ params }: { params: Params }) {
   const { productId } = await params;
@@ -35,6 +36,7 @@ export default async function ProductDetails({ params }: { params: Params }) {
                   {products.description}
                 </p>
               </div>
+              <AddToWishlist productId={products._id} />
 
               <div className="flex items-center gap-2 text-sm">
                 <span className="font-medium flex gap-2 items-center">
