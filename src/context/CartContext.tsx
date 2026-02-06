@@ -3,6 +3,7 @@
 import React, { createContext, useEffect } from "react";
 import { useState } from "react";
 import { CartResponseI } from "@/interfaces";
+import { GetCartDataAction } from "./_action/GetCartData_action";
 
 export const CartContext = createContext<{
   cartData: CartResponseI | null;
@@ -29,16 +30,7 @@ export default function CartContextProvider({
   async function getCartData() {
     //fetch cart data from api and set it to cartData state
     setIsLoading(true);
-    const response = await fetch(
-      "https://ecommerce.routemisr.com/api/v1/cart",
-      {
-        headers: {
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
-        },
-      },
-    );
-    const data: CartResponseI = await response.json();
+    const data = await GetCartDataAction();
     console.log(data);
     setCartData(data);
     setIsLoading(false);

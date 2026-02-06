@@ -12,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FetchAllOrdersAction } from "./_action/FetshAllOrders_action";
+import { FetchAllOrdersAction } from "./_action/FetchAllOrders_action";
 
 export default function AllOrders() {
   const [orders, setOrders] = useState<ordersI[]>([]);

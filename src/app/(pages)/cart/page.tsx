@@ -24,7 +24,7 @@ import {
   RemoveCartItemAction,
 } from "./_action/RemoveCartItem_action";
 import { UpdateCartItemAction } from "./_action/UpdateCartItem_action";
-import { ClearCartAction } from "./_action/clearCart_action";
+import { ClearCartAction } from "./_action/ClearCart_action";
 
 export default function Cart() {
   const { cartData, isLoading, getCartData, setCartData } =

@@ -1,6 +1,7 @@
 "use client";
 import { WishlistResponseI } from "@/interfaces/wishlist";
 import React, { createContext, useEffect, useState } from "react";
+import { GetWishlistDataAction } from "./_action/GetWishlistData_action";
 
 export const wishlistContext = createContext<{
   wishlistData: WishlistResponseI | null;
@@ -28,16 +29,7 @@ export default function WishlistContextProvider({
 
   async function getWishlistData() {
     setIsLoading(true);
-    const response = await fetch(
-      "https://ecommerce.routemisr.com/api/v1/wishlist",
-      {
-        headers: {
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
-        },
-      },
-    );
-    const data: WishlistResponseI = await response.json();
+    const data = await GetWishlistDataAction();
     console.log(data);
     setWishlistData(data);
     setIsLoading(false);

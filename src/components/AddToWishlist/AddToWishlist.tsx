@@ -6,6 +6,7 @@ import { WishlistResponseI } from "@/interfaces/wishlist";
 import toast from "react-hot-toast";
 import { wishlistContext } from "@/context/wishlistContext";
 import { get } from "http";
+import { handleAddToWishlistAction } from "@/app/(pages)/wishlist/_action/handleAddToWishlist_action";
 
 export default function AddToWishlist({ productId }: { productId: string }) {
   const [isLoading, setLoading] = useState(false);
@@ -15,19 +16,7 @@ export default function AddToWishlist({ productId }: { productId: string }) {
 
   async function handleAddToWishlist() {
     setLoading(true);
-    const response = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/wishlist`,
-      {
-        method: "POST",
-        body: JSON.stringify({ productId: productId }),
-        headers: {
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
-          "content-type": "application/json",
-        },
-      },
-    );
-    const data: WishlistResponseI = await response.json();
+    const data = await handleAddToWishlistAction(productId);
     console.log(data);
     if (data.status === "success") {
       toast.success("Product added to wishlist successfully");

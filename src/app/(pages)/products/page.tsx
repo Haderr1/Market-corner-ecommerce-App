@@ -3,9 +3,7 @@ import { ProductI } from "@/interfaces";
 import React from "react";
 
 export default async function Products() {
-  const response = await fetch(
-    "https://ecommerce.routemisr.com/api/v1/products",
-  );
+  const response = await fetch(`${process.env.API_URL}/products`);
   const { data: products }: { data: ProductI[] } = await response.json();
   return (
     <>

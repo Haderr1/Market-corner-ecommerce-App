@@ -14,6 +14,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { AddressResponseI } from "@/interfaces";
 import toast from "react-hot-toast";
+import { AddAddressAction } from "@/app/(pages)/Address/_action/AddAddress_action";
 
 export default function AddAddress({ onSuccess }: { onSuccess: () => void }) {
   const [open, setOpen] = useState(false);
@@ -31,20 +32,8 @@ export default function AddAddress({ onSuccess }: { onSuccess: () => void }) {
       city: cityInput.current?.value,
       phone: phoneInput.current?.value,
     };
-
-    const response = await fetch(
-      "https://ecommerce.routemisr.com/api/v1/addresses",
-      {
-        method: "POST",
-        body: JSON.stringify(newAddress),
-        headers: {
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
-          "content-type": "application/json",
-        },
-      },
-    );
-    const data: AddressResponseI = await response.json();
+    const data = await AddAddressAction(newAddress);
+  
     console.log(data);
     if (data.status === "success") {
       toast.success(data.message);
