@@ -4,7 +4,7 @@ import { AddressResponseI } from "@/interfaces/Adress";
 
 export async function DeleteAddressAction(addressId: string) {
   const response = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/addresses/${addressId}`,
+    `${process.env.API_URL}/addresses/${addressId}`,
     {
       method: "DELETE",
       headers: {

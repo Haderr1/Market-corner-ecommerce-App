@@ -12,57 +12,55 @@ import AddToCart from "@/components/AddToCart/AddToCart";
 import AddToWishlist from "@/components/AddToWishlist/AddToWishlist";
 
 export default async function ProductDetails({ params }: { params: Params }) {
-  const { productId } = await params;
-  const response = await fetch(
-    "https://ecommerce.routemisr.com/api/v1/products/" + productId,
-  );
+	const { productId } = await params;
+	const response = await fetch(`${process.env.API_URL}/products/${productId}`);
 
-  const { data: products }: { data: ProductI } = await response.json();
+	const { data: products }: { data: ProductI } = await response.json();
 
-  return (
-    <>
-      <div className="grid gap-8 md:grid-cols-2">
-        <ProductSlider products={products} />
-        <Card>
-          <CardContent className="space-y-4">
-            <div className="flex justify-between items-start">
-              <div className="space-y-1">
-                <h1 className="text-2xl font-semibold">{products.title}</h1>
-                <div className="flex gap-2">
-                  <Badge variant="secondary">{products.category.name}</Badge>
-                  <Badge variant="outline">{products.brand.name}</Badge>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed pt-6">
-                  {products.description}
-                </p>
-              </div>
-              <AddToWishlist productId={products._id} />
+	return (
+		<>
+			<div className="grid gap-8 md:grid-cols-2 items-center">
+				<ProductSlider products={products} />
+				<Card>
+					<CardContent className="space-y-4">
+						<div className="flex justify-between items-start">
+							<div className="space-y-1">
+								<h1 className="text-2xl font-semibold">{products.title}</h1>
+								<div className="flex gap-2">
+									<Badge variant="secondary">{products.category.name}</Badge>
+									<Badge variant="outline">{products.brand.name}</Badge>
+								</div>
+								<p className="text-sm text-muted-foreground leading-relaxed pt-6">
+									{products.description}
+								</p>
+							</div>
+							<AddToWishlist productId={products._id} />
 
-              <div className="flex items-center gap-2 text-sm">
-                <span className="font-medium flex gap-2 items-center">
-                  <Star className="text-yellow-300 h-4.5 w-4.5" />{" "}
-                  {products.ratingsAverage}
-                </span>
-                <span className="text-muted-foreground">
-                  ({products.ratingsQuantity} reviews)
-                </span>
-              </div>
-            </div>
-            <Separator />
+							<div className="flex items-center gap-2 text-sm">
+								<span className="font-medium flex gap-2 items-center">
+									<Star className="text-yellow-300 h-4.5 w-4.5" />{" "}
+									{products.ratingsAverage}
+								</span>
+								<span className="text-muted-foreground">
+									({products.ratingsQuantity} reviews)
+								</span>
+							</div>
+						</div>
+						<Separator />
 
-            <p className="text-3xl font-semibold text-end">
-              {products.price} EGP
-            </p>
-          </CardContent>
+						<p className="text-3xl font-semibold text-end">
+							{products.price} EGP
+						</p>
+					</CardContent>
 
-          <CardFooter className="flex flex-col gap-3">
-            <AddToCart productId={products._id} />
-            <p className="text-xs text-muted-foreground text-center">
-              Available quantity: {products.quantity}
-            </p>
-          </CardFooter>
-        </Card>
-      </div>
-    </>
-  );
+					<CardFooter className="flex flex-col gap-3">
+						<AddToCart productId={products._id} />
+						<p className="text-xs text-muted-foreground text-center">
+							Available quantity: {products.quantity}
+						</p>
+					</CardFooter>
+				</Card>
+			</div>
+		</>
+	);
 }

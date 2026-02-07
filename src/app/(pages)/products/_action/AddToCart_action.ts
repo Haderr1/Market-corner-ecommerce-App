@@ -1,15 +1,15 @@
 "use server";
 export async function AddToCartAction(productId: string) {
-  const response = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
-    method: "POST",
-    body: JSON.stringify({ productId }),
-    headers: {
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
-      "content-type": "application/json",
-    },
-  });
-  const data = await response.json();
+	const response = await fetch(`${process.env.API_URL}/cart`, {
+		method: "POST",
+		body: JSON.stringify({ productId }),
+		headers: {
+			token:
+				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
+			"content-type": "application/json",
+		},
+	});
+	const data = await response.json();
 
-  return data;
+	return data;
 }

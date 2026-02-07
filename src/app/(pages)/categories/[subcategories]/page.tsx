@@ -13,7 +13,7 @@ import {
 export default async function SubCategories({ params }: { params: Params }) {
   const { subcategories } = await params;
   const response = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/categories/${subcategories}/subcategories`,
+    `${process.env.API_URL}/categories/${subcategories}/subcategories`,
   );
   const { data: subcategoriesData }: { data: SubcategoryI[] } =
     await response.json();

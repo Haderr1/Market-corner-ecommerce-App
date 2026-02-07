@@ -9,7 +9,7 @@ export async function AddAddressAction(newAddress: {
   city?: string;
 }) {
   const response = await fetch(
-    "https://ecommerce.routemisr.com/api/v1/addresses",
+    `${process.env.API_URL}/addresses`,
     {
       method: "POST",
       body: JSON.stringify(newAddress),

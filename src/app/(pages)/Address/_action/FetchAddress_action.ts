@@ -2,7 +2,7 @@
 'use server'
 export async function FetchAddressesAction() {
         const response = await fetch(
-          "https://ecommerce.routemisr.com/api/v1/addresses",
+          `${process.env.API_URL}/addresses`,
           {
             headers: {
               token:

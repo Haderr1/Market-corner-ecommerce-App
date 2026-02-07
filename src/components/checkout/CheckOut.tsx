@@ -15,7 +15,8 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { CartContext } from "@/context/CartContext";
 import toast from "react-hot-toast";
-import { checkOutSessionAction } from "@/app/(pages)/cart/_action/checkOutSession_action";
+import { checkOutSessionAction } from "@/app/(pages)/cart/_action/CheckOutSession_action";
+import { CashOrderAction } from "@/app/(pages)/cart/_action/CashOrder_action";
 export default function CheckOut({ cartId }: { cartId: string }) {
 	const cityInput = useRef<HTMLInputElement | null>(null);
 	const detailsInput = useRef<HTMLInputElement | null>(null);
@@ -38,7 +39,7 @@ export default function CheckOut({ cartId }: { cartId: string }) {
 			city: cityInput.current?.value,
 		};
 
-    const data = await  checkOutSessionAction(cartId, shippingAddress);
+		const data = await checkOutSessionAction(cartId, shippingAddress);
 		console.log(data);
 		if (data.status == "success") {
 			window.location.href = data.session.url;
@@ -55,20 +56,7 @@ export default function CheckOut({ cartId }: { cartId: string }) {
 		};
 
 		try {
-			const response = await fetch(
-				`https://ecommerce.routemisr.com/api/v1/orders/${cartId}`,
-				{
-					method: "POST",
-					body: JSON.stringify({ shippingAddress }),
-					headers: {
-						token:
-							"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NzdhOGYxODI0ZDMzNjJjNDUyYWQyYSIsIm5hbWUiOiJIYWRlciBGYXJhZyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NDQ5ODIxLCJleHAiOjE3NzcyMjU4MjF9.51CjXx1gdrmBPQh1haOuP5_TAyzobWdjModDlGs6OY4",
-						"content-type": "application/json",
-					},
-				},
-			);
-
-			const data = await response.json();
+			const data = await CashOrderAction(cartId, shippingAddress);
 			console.log(data);
 
 			if (data?.statusMsg === "error") {
@@ -117,7 +105,6 @@ export default function CheckOut({ cartId }: { cartId: string }) {
 						</div>
 
 						<DialogFooter>
-							
 							<Button
 								type="submit"
 								disabled={loadingvisa}
