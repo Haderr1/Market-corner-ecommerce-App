@@ -1,6 +1,6 @@
 "use server";
 
-import { AddressResponseI } from "@/interfaces/Adress";
+import { AddressResponseI } from "@/interfaces/Address";
 
 export async function DeleteAddressAction(addressId: string) {
   const response = await fetch(

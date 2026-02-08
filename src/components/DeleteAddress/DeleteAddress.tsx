@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
-import { AddressResponseI } from "@/interfaces/Adress";
+import { AddressResponseI } from "@/interfaces/Address";
 import toast from "react-hot-toast";
 import { DeleteAddressAction } from "@/app/(pages)/Address/_action/DeleteAddress_action";
 
