@@ -6,8 +6,16 @@ export interface SuccessSignupResponseI {
   token: string;
 }
 
+export interface ApiFieldError {
+  value?: string;
+  msg: string;
+  param?: string;
+  location?: string;
+}
+
 export interface FailedSignupResponseI {
-  statusMsg: string;
-  message: string;
+  message: "fail";
+  errors?: ApiFieldError[];
+  statusMsg?: string;
 }
 

@@ -71,7 +71,9 @@ export default function Register() {
   const router = useRouter();
 
   async function onSubmit(values: FormFields) {
-    setIsLoading(true)
+    setIsLoading(true);
+    setApiError(null);
+
     const response = await fetch(
       "https://ecommerce.routemisr.com/api/v1/auth/signup",
       {
@@ -83,16 +85,16 @@ export default function Register() {
 
     const data = await response.json();
 
-    console.log("STATUS:", response.status);
-    console.log("DATA:", data);
-
-    if (response.ok && data.message === "success") {
+    if (data.message === "success") {
       router.push("/login");
       return;
     }
+
+    setApiError(data.errors?.[0]?.msg || "Signup failed");
+
     setIsLoading(false);
-    setApiError(data.message || "Signup failed");
   }
+
   return (
     <>
       <div className="min-h-[80vh] flex items-center justify-center px-4">
