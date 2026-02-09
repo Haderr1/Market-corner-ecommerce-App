@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LoaderIcon } from "react-hot-toast";
 import { Separator } from "@/components/ui/separator";
+import { handleRegisterAction } from "./_action/handleRegister";
+import Link from "next/link";
 
 const formSchema = z
 	.object({
@@ -74,16 +76,7 @@ export default function Register() {
 		setIsLoading(true);
 		setApiError(null);
 
-		const response = await fetch(
-			"https://ecommerce.routemisr.com/api/v1/auth/signup",
-			{
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(values),
-			},
-		);
-
-		const data = await response.json();
+		const data = await handleRegisterAction(values);
 
 		if (data.message === "success") {
 			router.push("/login");
@@ -152,7 +145,12 @@ export default function Register() {
 										<FormItem>
 											<FieldLabel>Phone</FieldLabel>
 											<FormControl>
-												<Input {...field} inputMode="tel" autoComplete="tel" />
+												<Input
+													{...field}
+													inputMode="tel"
+													autoComplete="tel"
+													placeholder="01xxxxxxxxx"
+												/>
 											</FormControl>
 											<FormMessage />
 										</FormItem>
@@ -203,6 +201,15 @@ export default function Register() {
 									{isLoading ? <LoaderIcon className="animate-spin" /> : null}
 									{isLoading ? "Creating..." : "Create Account"}
 								</Button>
+								<p className="text-sm text-secondary-500 my-4 text-center">
+									Already have an account?
+									<Link
+										href={"/login"}
+										className="text-primary hover:text-primary/80"
+									>
+										Login
+									</Link>
+								</p>
 							</form>
 						</Form>
 					</CardContent>
