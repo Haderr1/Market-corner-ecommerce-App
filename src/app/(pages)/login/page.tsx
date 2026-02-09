@@ -18,6 +18,8 @@ import { FieldLabel } from "@/components/ui/field";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { LoaderIcon } from "react-hot-toast";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 const formSchema = z.object({
   email: z
@@ -76,7 +78,7 @@ export default function Login() {
 
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col justify-end">
               <FormField
                 name="email"
                 control={form.control}
@@ -114,8 +116,12 @@ export default function Login() {
                   </FormItem>
                 )}
               />
+              <Link href={'/forgetpassword'} className="text-primary text-end hover:text-primary/80 text-sm pb-5">
+              ForgetPassword?
+              </Link>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Separator/>
+              <Button type="submit" className="w-full " disabled={isLoading}>
                 {isLoading ? <LoaderIcon className="animate-spin" /> : null}
                 {isLoading ? "Logging in..." : "Login"}
               </Button>

@@ -8,16 +8,20 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function Home() {
 	const base = process.env.API_URL;
+	console.log("API_URL:", process.env.API_URL);
 
 	const [brandsRes, categoriesRes, productsRes] = await Promise.all([
 		fetch(`${base}/brands?limit=4`, { cache: "no-store" }),
 		fetch(`${base}/categories?limit=8`, { cache: "no-store" }),
-		fetch(`${base}/products?limit=8`, { cache: "no-store" }),
+		fetch(`${base}/products?limit=4`, { cache: "no-store" }),
 	]);
 
 	if (!brandsRes.ok || !categoriesRes.ok || !productsRes.ok) {
 		throw new Error("Failed to load home data");
 	}
+	console.log("brands:", brandsRes.status, brandsRes.url);
+	console.log("categories:", categoriesRes.status, categoriesRes.url);
+	console.log("products:", productsRes.status, productsRes.url);
 
 	const { data: brands }: { data: BrandI[] } = await brandsRes.json();
 	const { data: categories }: { data: CategoryI[] } =
@@ -25,13 +29,7 @@ export default async function Home() {
 	const { data: products }: { data: ProductI[] } = await productsRes.json();
 	return (
 		<>
-			<section
-				className="
-        relative overflow-hidden
-        h-[80vh] min-h-screen
-        -mx-24 -my-8
-      "
-			>
+			<section className="relative overflow-hidden h-[80vh] min-h-screen -mx-24 ">
 				<Image
 					src={hero1}
 					alt="MarketCorner Hero"
@@ -90,19 +88,15 @@ export default async function Home() {
 												{brand.slug}
 											</Badge>
 											<CardTitle>{brand.name}</CardTitle>
-
-											{/* Optional: link */}
-											<Button
-												asChild
-												variant="ghost"
-												className="px-0 justify-start"
-											>
-												<Link href={`/brands/${brand._id}`}>View</Link>
-											</Button>
 										</CardHeader>
 									</Card>
 								</Link>
 							))}
+							<Link href={`/brands`}>
+								<Button asChild variant="ghost" className="px-0 justify-start">
+									View
+								</Button>
+							</Link>
 						</div>
 					</div>
 					<Button size="lg" className="w-56">
@@ -143,9 +137,58 @@ export default async function Home() {
 							))}
 						</div>
 					</div>
-					<Button size="lg" className="w-56">
-						<Link href="/categories">View More</Link>
-					</Button>
+					<Link href="/categories">
+						<Button size="lg" className="w-56">
+							View More
+						</Button>
+					</Link>
+				</div>
+			</section>
+			{/* Products */}
+			<section className="px-4 py-20 md:py-14">
+				<div className="mx-auto max-w-6xl flex flex-col justify-center items-center gap-16">
+					<div className="mb-6 flex items-end justify-between gap-4">
+						<div>
+							<h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+								Products You May Love
+							</h2>
+							<p className="text-sm text-muted-foreground mt-2 uppercase">
+								Curated collections to match your style.
+							</p>
+						</div>
+					</div>
+					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full">
+						{products?.map((prod) => (
+							<Link key={prod._id} href={`/products/${prod._id}`}>
+								<Card className="group relative overflow-hidden border-muted/60 bg-background/60 transition duration-500 hover:-translate-y-1 hover:shadow-lg hover:scale-105">
+									<div className="absolute inset-0 bg-linear-to-t from-primary/20 via-transparent to-primary/40 opacity-70 transition group-hover:opacity-90" />
+									<Image
+										src={prod.imageCover}
+										width={600}
+										height={600}
+										alt={`${prod.title} cover`}
+										className="h-48 w-full object-cover"
+									/>
+									<CardHeader>
+										<Badge variant="secondary" className="w-fit">
+											{prod.slug}
+										</Badge>
+										<CardTitle>{prod.title}</CardTitle>
+									</CardHeader>
+								</Card>
+							</Link>
+						))}
+						<Link href={`/products`}>
+							<Button asChild variant="ghost" className="px-0 justify-start">
+								View
+							</Button>
+						</Link>
+					</div>
+					<Link href="/products">
+						<Button size="lg" className="w-56">
+							View More
+						</Button>
+					</Link>
 				</div>
 			</section>
 		</>

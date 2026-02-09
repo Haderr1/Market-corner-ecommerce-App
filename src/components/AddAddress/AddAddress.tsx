@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { AddressResponseI } from "@/interfaces";
 import toast from "react-hot-toast";
 import { AddAddressAction } from "@/app/(pages)/Address/_action/AddAddress_action";
 
@@ -37,7 +36,7 @@ export default function AddAddress({ onSuccess }: { onSuccess: () => void }) {
     console.log(data);
     if (data.status === "success") {
       toast.success(data.message);
-      onSuccess(); //  الدالة لتحديث القائمة في المكون الأب}
+      onSuccess(); 
       setAddressLoading(false);
       setOpen(false);
     }
