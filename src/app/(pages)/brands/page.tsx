@@ -4,10 +4,13 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardAction, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Brands() {
 	const response = await fetch(`${process.env.API_URL}/brands`);
 	const { data: brands }: { data: BrandI[] } = await response.json();
+
+
 	return (
 		<>
 			<div className="px-4 py-8 md:py-12">
@@ -28,28 +31,30 @@ export default async function Brands() {
 
 					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 						{brands.map((brand) => (
-							<Card
-								key={brand._id}
-								className="group relative overflow-hidden border-muted/60 bg-background/60 transition duration-500 hover:-translate-y-1 hover:shadow-lg hover:scale-105"
-							>
-								<div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-primary/40 opacity-70 transition group-hover:opacity-90 " />
-								<Image
-									src={brand.image}
-									width={600}
-									height={600}
-									alt={`${brand.name} cover`}
-									className="h-48 w-full object-cover "
-								/>
+							<Link href={"/brands/" + brand._id} key={brand._id}>
+								<Card
+									key={brand._id}
+									className="group relative overflow-hidden border-muted/60 bg-background/60 transition duration-500 hover:-translate-y-1 hover:shadow-lg hover:scale-105"
+								>
+									<div className="absolute inset-0 bg-linear-to-t from-primary/20 via-transparent to-primary/40 opacity-70 transition group-hover:opacity-90 " />
+									<Image
+										src={brand.image}
+										width={600}
+										height={600}
+										alt={`${brand.name} cover`}
+										className="h-48 w-full object-cover "
+									/>
 
-								<CardHeader>
-									<CardAction>
-										<Badge variant="secondary" className="text-black">
-											{brand.slug}
-										</Badge>
-									</CardAction>
-									<CardTitle>{brand.name}</CardTitle>
-								</CardHeader>
-							</Card>
+									<CardHeader>
+										<CardAction>
+											<Badge variant="secondary" className="text-black">
+												{brand.slug}
+											</Badge>
+										</CardAction>
+										<CardTitle>{brand.name}</CardTitle>
+									</CardHeader>
+								</Card>
+							</Link>
 						))}
 					</div>
 				</div>

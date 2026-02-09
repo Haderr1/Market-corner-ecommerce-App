@@ -75,34 +75,33 @@ export default async function Home() {
 						</div>
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 							{brands?.map((brand) => (
-								<Card
-									key={brand._id}
-									className="group relative overflow-hidden border-muted/60 bg-background/60 transition duration-500 hover:-translate-y-1 hover:shadow-lg hover:scale-105"
-								>
-									<div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-primary/40 opacity-70 transition group-hover:opacity-90" />
-									<Image
-										src={brand.image}
-										width={600}
-										height={600}
-										alt={`${brand.name} cover`}
-										className="h-48 w-full object-cover"
-									/>
-									<CardHeader>
-										<Badge variant="secondary" className="w-fit">
-											{brand.slug}
-										</Badge>
-										<CardTitle>{brand.name}</CardTitle>
+								<Link key={brand._id} href={`/brands/${brand._id}`}>
+									<Card className="group relative overflow-hidden border-muted/60 bg-background/60 transition duration-500 hover:-translate-y-1 hover:shadow-lg hover:scale-105">
+										<div className="absolute inset-0 bg-linear-to-t from-primary/20 via-transparent to-primary/40 opacity-70 transition group-hover:opacity-90" />
+										<Image
+											src={brand.image}
+											width={600}
+											height={600}
+											alt={`${brand.name} cover`}
+											className="h-48 w-full object-cover"
+										/>
+										<CardHeader>
+											<Badge variant="secondary" className="w-fit">
+												{brand.slug}
+											</Badge>
+											<CardTitle>{brand.name}</CardTitle>
 
-										{/* Optional: link */}
-										<Button
-											asChild
-											variant="ghost"
-											className="px-0 justify-start"
-										>
-											<Link href={`/brands/${brand._id}`}>View</Link>
-										</Button>
-									</CardHeader>
-								</Card>
+											{/* Optional: link */}
+											<Button
+												asChild
+												variant="ghost"
+												className="px-0 justify-start"
+											>
+												<Link href={`/brands/${brand._id}`}>View</Link>
+											</Button>
+										</CardHeader>
+									</Card>
+								</Link>
 							))}
 						</div>
 					</div>
