@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import Cart from "./(pages)/cart/page";
 import CartContextProvider from "@/context/CartContext";
 import WishlistContextProvider from "@/context/wishlistContext";
+import MySessionProvider from "@/components/MySessionProvider/MySessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        <CartContextProvider>
+       <MySessionProvider>
+         <CartContextProvider>
           <WishlistContextProvider>
             <Navbar />
             <main className="flex-1 container mx-auto px-24 py-8">
@@ -43,6 +45,7 @@ export default function RootLayout({
             <Footer />
           </WishlistContextProvider>
         </CartContextProvider>
+       </MySessionProvider>
       </body>
     </html>
   );
